@@ -10,7 +10,7 @@ const NewsList = (props) => {
 	})
 	
 	return (
-		<ul>
+		<ul className="right floated right aligned six wide column">
 			<h2>This is the NewsList component</h2>
 			{articleItems}
 		</ul>

@@ -38,7 +38,7 @@ class WeatherContainer extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="six wide column">
 				<p>this is the WeatherContainer</p>
 				<WeatherItem weather={this.state.weather}/>
 			</div>

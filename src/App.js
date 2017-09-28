@@ -10,7 +10,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App ui right aligned grid">
         <p>You're in the app</p>
         <NewsListContainer />
         <WeatherContainer />

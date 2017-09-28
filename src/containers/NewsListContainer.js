@@ -30,7 +30,7 @@ class NewsListContainer extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="right floated right aligned six wide column">
 				<h1>This is the NewsListContainer</h1>
 				<NewsList articles={this.state.articles} />
 			</div>
