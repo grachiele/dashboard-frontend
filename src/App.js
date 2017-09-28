@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import NewsListContainer from './containers/NewsListContainer'
+import NewsListContainer from './containers/NewsListContainer';
+import WeatherContainer from './containers/WeatherContainer';
 
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
       <div className="App">
         <p>You're in the app</p>
         <NewsListContainer />
+        <WeatherContainer />
       </div>
     );
   }

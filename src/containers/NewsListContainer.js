@@ -24,7 +24,7 @@ class NewsListContainer extends React.Component {
 			.then((respJSON) => {
 				this.setState({
 					articles: respJSON.results
-				})
+				});
 			})
 	}
 
