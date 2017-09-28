@@ -19,6 +19,7 @@ class App extends Component {
 
   componentDidMount(){
     // had to comment out all the authorization stuff on the backend
+    // you also need to db:reset
     // it was just getting a redirect to '/welcome' when I did a fetch and that route didn't exist.
     // I put two users in the database to test whether I could set state based on which user was hit.
     // comment out one and uncomment the other to see how it handles it.
