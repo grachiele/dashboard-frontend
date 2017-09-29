@@ -4,6 +4,7 @@ import WeatherContainer from './containers/WeatherContainer';
 import { BrowserRouter as Router} from 'react-router-dom'
 import {Route} from 'react-router-dom'
 import LogIn from './components/LogIn'
+import { Container } from 'semantic-ui-react';
 
 
 class App extends Component {
@@ -82,14 +83,14 @@ class App extends Component {
   render() {
     console.log("this.state: ", this.state)
     return (
-      <div className="App ui right aligned grid">
+      <Container>
         <Router>
           <Route path='/login' render={() => <LogIn logInUser={this.logInUser} />} />
         </Router>
         <p>You're in the app</p>
         {this.state.user ? <NewsListContainer />: null}
         {this.state.user ? <WeatherContainer />: null}
-      </div>
+      </Container>
     );
   }
 }

@@ -1,6 +1,7 @@
 
 import React from 'react';
 import NewsList from '../components/NewsList';
+import { Container } from 'semantic-ui-react'
 
 class NewsListContainer extends React.Component {
 
@@ -30,10 +31,9 @@ class NewsListContainer extends React.Component {
 
 	render() {
 		return (
-			<div className="right floated right aligned six wide column">
-				<h1>This is the NewsListContainer</h1>
+			<Container>
 				<NewsList articles={this.state.articles} />
-			</div>
+			</Container>
 		);
 	}
 
