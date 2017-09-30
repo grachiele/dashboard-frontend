@@ -26,13 +26,7 @@ class LogIn extends React.Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault()
-		console.log("Something happened")
-		console.log(this.state)
-		//props.callback(some info from form)
-		// log in user
-		console.log(this.props)
 		this.props.logInUser({username: this.state.username, password: this.state.password})
-
 		this.setState({
 			username: "",
 			password: ""
