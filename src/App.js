@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 // import NewsListContainer from './containers/NewsListContainer';
 // import WeatherContainer from './containers/WeatherContainer';
 
-import {Route} from 'react-router-dom';
+import {Route, Redirect} from 'react-router-dom';
 import LogIn from './components/LogIn';
-// import { Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import WidgetsContainer from './containers/WidgetsContainer';
+import Authorize from './components/Authorize'
+import Preferences from './components/Preferences'
+import SignUp from './components/SignUp'
 
 
 class App extends Component {
@@ -41,21 +44,28 @@ class App extends Component {
     })
   }
 
-  fetchUserInfo() {
-    // move the fetch request into here?
-    // just pass decoded jwtToken (which is userID) to fetch from /users/:id ?????
-    // need to pass in Authorization header for normal fetch request (not the login)
-    /*
-      if item exists in local storage
-      get token from local storage
-      put it into Authorization key of fetch request header
-      make fetch request to localhost 3000 /??????
+  updatePreferences = (preferencesParams) => {
+    fetch("http://localhost:3000/login", {
+      method: 'PATCH',
+      body: JSON.stringify(preferencesParams),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((respJSON) => {
+      this.setState({
+        user: respJSON.user,
+      })
+    })
+  }
 
-      backend will make sure token is legit
-    */
+  fetchUserInfo() {
     if (localStorage.getItem('jwtToken')) {
-      console.log("before fetch")
-      fetch("http://localhost:3000/welcome", {
+      return fetch("http://localhost:3000/welcome", {
         method: 'GET',
         headers: {
           "Accept": "application/json",
@@ -64,15 +74,9 @@ class App extends Component {
         }
       })
       .then((resp) => {
-        console.log("got resp")
         return resp.json();
       })
       .then((respJSON) => {
-        console.log("poatto")
-        console.log(respJSON);
-        // iff user object comes back in respJSN then :
-        // -----set state to loggedIn: true, etc.
-        // -----change render to work accordingly
         if (respJSON.id) {
           this.setState({
             isLoggedIn: true,
@@ -80,12 +84,9 @@ class App extends Component {
           })
         } else {
           // redirect to login or something
-        }  
-          
+        }
+
       })
-      // .then(() => {
-      //   console.log(this.state)
-      // })
     } else {
       console.log("no jwtToken found in localStorage")
     }
@@ -93,35 +94,50 @@ class App extends Component {
 
   componentDidMount() {
     console.log("app did mount")
-    this.fetchUserInfo();
+    this.fetchUserInfo()
   }
 
   logOutUser = () => {
     // fill in --- delete token from local storage, setState
   }
 
+  signUpUser = (signUpParams) => {
+    fetch("http://localhost:3000/api/v1/users", {
+      method: 'post',
+      body: JSON.stringify(signUpParams),
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .then((response) => {
+      return response.json()
+    })
+    .then((respJSON) => {
+      console.log(respJSON)
+      localStorage.setItem('jwtToken', respJSON.jwt)
+      this.setState({
+        user: respJSON.user,
+        isLoggedIn: true
+      })
+    })
+  }
+
   render() {
     console.log("this.state: ", this.state)
+    const AuthWidget = Authorize(WidgetsContainer)
+    const AuthLogIn = Authorize(LogIn)
+    const AuthPreferences = Authorize(Preferences)
+    const AuthSignUp = Authorize(SignUp)
 
-
-
-    if (this.state.isLoggedIn) {
-      console.log("gettin there")
-      return (
-        <Route path='/home' render={() => <WidgetsContainer user={this.state.user} />}/>
-      );
-    } else {
-      return (
-        <Route path='/login' render={() => <LogIn logInUser={this.logInUser} />} />
-      );
-    }
-
-    // return (
-    //   <Container>
-    //     <Route path='/login' render={() => <LogIn logInUser={this.logInUser} />} />
-    //     <Route path='/home' render={() => <WidgetsContainer user={this.state.user} />}/>
-    //   </Container>
-    // );
+    return (
+      <Container>
+        <Route path='/login' render={(props) => <AuthLogIn logInUser={this.logInUser} {...props} />} />
+        <Route path='/home' render={(props) => <AuthWidget user={this.state.user} {...props} />}/>
+        <Route path='/preferences' render={(props) => <AuthPreferences user={this.state.user} {...props} />}/>
+        <Route path='/signup' render={(props) => <AuthSignUp signUpUser={this.signUpUser} {...props} />}/>
+      </Container>
+    );
   }
 }
 
