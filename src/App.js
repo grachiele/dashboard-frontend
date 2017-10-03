@@ -45,12 +45,13 @@ class App extends Component {
   }
 
   updatePreferences = (preferencesParams) => {
-    fetch("http://localhost:3000/login", {
+    fetch("http://localhost:3000/update", {
       method: 'PATCH',
       body: JSON.stringify(preferencesParams),
       headers: {
         "Accept": "application/json",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('jwtToken')
       }
     })
     .then((response) => {
@@ -134,7 +135,7 @@ class App extends Component {
       <Container>
         <Route path='/login' render={(props) => <AuthLogIn logInUser={this.logInUser} {...props} />} />
         <Route path='/home' render={(props) => <AuthWidget user={this.state.user} {...props} />}/>
-        <Route path='/preferences' render={(props) => <AuthPreferences user={this.state.user} {...props} />}/>
+        <Route path='/preferences' render={(props) => <AuthPreferences updatePreferences={this.updatePreferences} user={this.state.user} {...props} />}/>
         <Route path='/signup' render={(props) => <AuthSignUp signUpUser={this.signUpUser} {...props} />}/>
       </Container>
     );
