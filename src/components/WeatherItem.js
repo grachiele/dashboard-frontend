@@ -2,8 +2,6 @@ import React from 'react';
 
 const WeatherItem = (props) => {
 
-	console.log(props);
-
 	const kelvinToFahrenheit = (degreesK) => {
 		let degreesF = ((degreesK - 273.15) * 1.8) + 32;
 		return degreesF.toFixed(2);
@@ -12,7 +10,7 @@ const WeatherItem = (props) => {
 
 	return (
 		<div>
-		<p>It is {kelvinToFahrenheit(props.weather.temp)} degrees</p>
+			<p>It is {kelvinToFahrenheit(props.weather.temp)} degrees</p>
 		</div>
 	);
 }

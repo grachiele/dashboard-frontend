@@ -6,7 +6,6 @@ class WeatherContainer extends React.Component {
 
 	constructor() {
 		super();
-
 		this.state = {
 			weather: []
 		}
@@ -15,24 +14,14 @@ class WeatherContainer extends React.Component {
 	
 
 	componentDidMount() {
-		// fetch 
-		// api.openweathermap.org/data/2.5/weather?zip=11249&APPID=1b3292d8476ca73faee1a365e843fbb1
-		// APPID=1b3292d8476ca73faee1a365e843fbb1
-		// replace zip with user's zip
-		fetch('https://api.openweathermap.org/data/2.5/weather?zip=11249&APPID=1b3292d8476ca73faee1a365e843fbb1')
+		fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${this.props.zipcode}&APPID=1b3292d8476ca73faee1a365e843fbb1`)
 			.then((resp) => {
-				// console.log("resp", resp);
-				// console.log("resp.json()", resp.json());
 				return resp.json()
 			})
-			.then((respJSON) => {
-				console.log('in second then')
-				console.log(respJSON.main)
-				
+			.then((respJSON) => {				
 				this.setState({
 					weather: respJSON.main
 				})
-
 			})
 	}
 
