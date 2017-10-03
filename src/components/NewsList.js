@@ -13,7 +13,7 @@ const NewsList = (props) => {
 	return (
 		<Card>
 			<Card.Content>
-				<Card.Header>This is the NewsList component</Card.Header>
+				<Card.Header>Headlines from The New York Times</Card.Header>
 			</Card.Content>
 			<Card.Content>
 				<Feed>{articleItems}</Feed>

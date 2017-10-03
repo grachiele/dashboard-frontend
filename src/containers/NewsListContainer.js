@@ -31,9 +31,7 @@ class NewsListContainer extends React.Component {
 
 	render() {
 		return (
-			<Container>
-				<NewsList articles={this.state.articles} />
-			</Container>
+			<NewsList articles={this.state.articles} />
 		);
 	}
 

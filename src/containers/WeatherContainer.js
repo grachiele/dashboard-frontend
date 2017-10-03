@@ -1,5 +1,6 @@
 import React from 'react';
-import WeatherItem from '../components/WeatherItem'
+import WeatherItem from '../components/WeatherItem';
+import { Container , Card, Feed } from 'semantic-ui-react';
 
 
 class WeatherContainer extends React.Component {
@@ -27,13 +28,18 @@ class WeatherContainer extends React.Component {
 
 	render() {
 		return (
-			<div className="six wide column">
-				<p>this is the WeatherContainer</p>
-				<WeatherItem weather={this.state.weather}/>
-			</div>
+			<Card>
+				<Card.Content>
+					<Card.Header>Weather in your area:</Card.Header>
+				</Card.Content>
+				<Card.Content>
+					<Feed><WeatherItem weather={this.state.weather}/></Feed>
+				</Card.Content>
+			</Card>
 		);
 	}
 
 }
 
 export default WeatherContainer;
+

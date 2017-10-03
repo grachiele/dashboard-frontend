@@ -1,7 +1,7 @@
 import React from 'react';
 import NewsListContainer from './NewsListContainer';
 import WeatherContainer from './WeatherContainer';
-import { Container } from 'semantic-ui-react'
+import { Container, Card } from 'semantic-ui-react'
 
 class WidgetsContainer extends React.Component {
 	constructor(props) {
@@ -12,10 +12,11 @@ class WidgetsContainer extends React.Component {
 	render() {
 		if (this.props.user) {
 			return (
-				<Container>
+				<Card.Group>
 					{this.props.user.news ? <NewsListContainer />: null}
 		        	{this.props.user.weather ? <WeatherContainer zipcode={this.props.user.zipcode} />: null}
-		        </Container>);
+		        </Card.Group>
+		    );
 		} else {
 			return null; 
 		}

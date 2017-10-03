@@ -1,4 +1,6 @@
 import React from 'react';
+import { Container , Card, Feed } from 'semantic-ui-react';
+
 
 const WeatherItem = (props) => {
 
@@ -9,9 +11,14 @@ const WeatherItem = (props) => {
 
 
 	return (
-		<div>
-			<p>It is {kelvinToFahrenheit(props.weather.temp)} degrees</p>
-		</div>
+		<Feed.Event>
+			<Feed.Content>
+				<Feed.Summary>
+					It is {kelvinToFahrenheit(props.weather.temp)} degrees
+				</Feed.Summary>
+			</Feed.Content>
+		</Feed.Event>
+
 	);
 }
 

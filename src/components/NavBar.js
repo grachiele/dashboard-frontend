@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-/* Add NavLink to importer */
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { Container } from 'semantic-ui-react';
+
  
 /* Add basic styling for NavLinks */
 const link = {
@@ -14,15 +15,11 @@ const link = {
   cursor: 'pointer'
 }
  
-/* add the navbar component */
 const NavBar = (props) => {
-  
-// -------- // need to receive isLoggedIn as props to determine which links to show
-	let content = null;
-
+  	let content = null;
 	if (props.isLoggedIn) {
 		content = (
-			<div>
+			<Container>
 				<NavLink 
 				    to="/home"
 				    exact
@@ -48,11 +45,11 @@ const NavBar = (props) => {
 	        			background: 'darkblue'
 	      			}}
 	    		>Logout</NavLink>
-	    	</div>
+	    	</Container>
 		);
 	} else {
 		content = (
-			<div>
+			<Container>
 				<NavLink 
 			    	to="/login"
 			    	exact
@@ -69,7 +66,7 @@ const NavBar = (props) => {
 			        	background: 'darkblue'
 			      	}}
 			    >Sign Up</NavLink>
-		    </div>
+		    </Container>
 		);
 	}
 

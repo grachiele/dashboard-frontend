@@ -1,4 +1,6 @@
 import React from 'react';
+import { Segment, Input, Button, Form } from 'semantic-ui-react';
+
 
 class SignUp extends React.Component {
 
@@ -78,21 +80,33 @@ class SignUp extends React.Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleSubmit}>
-				<label>Username</label>
-				<input type="text" onChange={this.handleUsernameChange} value={this.state.username}/>
-				<label>Password</label>
-				<input type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
-				<label>Password Confirmation</label>
-				<input type="password" onChange={this.handlePasswordConfirmationChange} value={this.state.password_confirm}/>
-				<label>Zipcode</label>
-				<input type="number" onChange={this.handleZipCodeChange} value={this.state.zipcode}/>
-				<input id="news" type="checkbox" onChange={this.handleNewsChange} value={this.state.news} />
-				<label>News</label>
-				<input id="weather" type="checkbox" onChange={this.handleWeatherChange} value={this.state.weather} />
-				<label>Weather</label>
+			<Form onSubmit={this.handleSubmit}>
+				<Form.Field>
+					<label>Username</label>
+					<input type="text" onChange={this.handleUsernameChange} value={this.state.username}/>
+				</Form.Field>
+				<Form.Field>	
+					<label>Password</label>
+					<input type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
+				</Form.Field>	
+				<Form.Field>
+					<label>Password Confirmation</label>
+					<input type="password" onChange={this.handlePasswordConfirmationChange} value={this.state.password_confirm}/>
+				</Form.Field>
+				<Form.Field>
+					<label>Zipcode</label>
+					<input type="number" onChange={this.handleZipCodeChange} value={this.state.zipcode}/>
+				</Form.Field>
+				<Form.Field>
+					<input id="news" type="checkbox" onChange={this.handleNewsChange} value={this.state.news} />
+					<label>News</label>
+				</Form.Field>
+				<Form.Field>
+					<input id="weather" type="checkbox" onChange={this.handleWeatherChange} value={this.state.weather} />
+					<label>Weather</label>
+				</Form.Field>
 				<input type="submit"/>
-			</form>
+			</Form>
 		);
 	}
 }
