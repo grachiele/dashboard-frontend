@@ -1,12 +1,12 @@
 import React from 'react';
-import WeatherItem from '../components/WeatherItem'
+import WeatherItem from '../components/WeatherItem';
+import { Container , Card, Feed } from 'semantic-ui-react';
 
 
 class WeatherContainer extends React.Component {
 
 	constructor() {
 		super();
-
 		this.state = {
 			weather: []
 		}
@@ -15,36 +15,31 @@ class WeatherContainer extends React.Component {
 	
 
 	componentDidMount() {
-		// fetch 
-		// api.openweathermap.org/data/2.5/weather?zip=11249&APPID=1b3292d8476ca73faee1a365e843fbb1
-		// APPID=1b3292d8476ca73faee1a365e843fbb1
-		// replace zip with user's zip
-		fetch('https://api.openweathermap.org/data/2.5/weather?zip=11249&APPID=1b3292d8476ca73faee1a365e843fbb1')
+		fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${this.props.zipcode}&APPID=1b3292d8476ca73faee1a365e843fbb1`)
 			.then((resp) => {
-				// console.log("resp", resp);
-				// console.log("resp.json()", resp.json());
 				return resp.json()
 			})
-			.then((respJSON) => {
-				console.log('in second then')
-				console.log(respJSON.main)
-				
+			.then((respJSON) => {				
 				this.setState({
 					weather: respJSON.main
 				})
-
 			})
 	}
 
 	render() {
 		return (
-			<div className="six wide column">
-				<p>this is the WeatherContainer</p>
-				<WeatherItem weather={this.state.weather}/>
-			</div>
+			<Card>
+				<Card.Content>
+					<Card.Header>Weather in your area:</Card.Header>
+				</Card.Content>
+				<Card.Content>
+					<Feed><WeatherItem weather={this.state.weather}/></Feed>
+				</Card.Content>
+			</Card>
 		);
 	}
 
 }
 
 export default WeatherContainer;
+

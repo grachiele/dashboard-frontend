@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-// import NewsListContainer from './containers/NewsListContainer';
-// import WeatherContainer from './containers/WeatherContainer';
-
 import {Route, Redirect} from 'react-router-dom';
 import LogIn from './components/LogIn';
-import { Container } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 import WidgetsContainer from './containers/WidgetsContainer';
-import Authorize from './components/Authorize'
-import Preferences from './components/Preferences'
-import SignUp from './components/SignUp'
+import Authorize from './components/Authorize';
+import Preferences from './components/Preferences';
+import SignUp from './components/SignUp';
+import NavBar from './components/NavBar';
 
 
 class App extends Component {
@@ -94,12 +92,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("app did mount")
     this.fetchUserInfo()
   }
 
   logOutUser = () => {
-    // fill in --- delete token from local storage, setState
+    localStorage.removeItem("jwtToken");
+    this.setState({
+      user: null,
+      isLoggedIn: false
+    })
+
   }
 
   signUpUser = (signUpParams) => {
@@ -125,18 +127,23 @@ class App extends Component {
   }
 
   render() {
-    console.log("this.state: ", this.state)
     const AuthWidget = Authorize(WidgetsContainer)
     const AuthLogIn = Authorize(LogIn)
     const AuthPreferences = Authorize(Preferences)
     const AuthSignUp = Authorize(SignUp)
 
     return (
+      // need to pass isLoggedIn into navbar to determine which links to show
       <Container>
-        <Route path='/login' render={(props) => <AuthLogIn logInUser={this.logInUser} {...props} />} />
-        <Route path='/home' render={(props) => <AuthWidget user={this.state.user} {...props} />}/>
-        <Route path='/preferences' render={(props) => <AuthPreferences updatePreferences={this.updatePreferences} user={this.state.user} {...props} />}/>
-        <Route path='/signup' render={(props) => <AuthSignUp signUpUser={this.signUpUser} {...props} />}/>
+        <Segment>
+          <NavBar logOutUser={this.logOutUser} isLoggedIn={this.state.isLoggedIn}/>
+        </Segment>
+        <Segment>
+          <Route path='/login' render={(props) => <AuthLogIn logInUser={this.logInUser} {...props} />} />
+          <Route path='/home' render={(props) => <AuthWidget user={this.state.user} {...props} />}/>
+          <Route path='/preferences' render={(props) => <AuthPreferences updatePreferences={this.updatePreferences} user={this.state.user} {...props} />}/>
+          <Route path='/signup' render={(props) => <AuthSignUp signUpUser={this.signUpUser} {...props} />}/>
+        </Segment>
       </Container>
     );
   }
