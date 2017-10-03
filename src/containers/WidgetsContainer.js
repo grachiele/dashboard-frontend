@@ -1,6 +1,7 @@
 import React from 'react';
 import NewsListContainer from './NewsListContainer';
 import WeatherContainer from './WeatherContainer';
+import RonSwansonContainer from './RonSwansonContainer'
 import { Container } from 'semantic-ui-react'
 
 class WidgetsContainer extends React.Component {
@@ -18,15 +19,16 @@ class WidgetsContainer extends React.Component {
 			return (
 				<Container>
 					{this.props.user.news ? <NewsListContainer />: null}
-		        	{this.props.user.weather ? <WeatherContainer />: null}
-		        </Container>);
+		      {this.props.user.weather ? <WeatherContainer />: null}
+					{this.props.user.quote ? <RonSwansonContainer />: null}
+		     </Container>);
 		} else {
-			return null; 
+			return null;
 			// placeholder -- should be a redirect? or redirect earlier?
 			// will have to be modified when we move over to routes ?
 		}
 
-		
+
 	}
 }
 
