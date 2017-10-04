@@ -4,12 +4,12 @@ import { Card, Feed } from 'semantic-ui-react';
 
 const NewsList = (props) => {
 
-	const articleItems = props.articles.map(function(article) {
+	const articleItems = props.articles.map(function(article, index) {
 		return (
-			<NewsItem key={article.title} article={article}/>
+			<NewsItem key={index} article={article} />
 		);
 	})
-	
+
 	return (
 		<Card>
 			<Card.Content>

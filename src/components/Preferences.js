@@ -8,10 +8,6 @@ class Preferences extends React.Component {
     this.state = this.props.user
   }
 
-  handleSubmit = () => {
-    // this.props.callbackFunction
-  }
-
   // handle zipcode
   handleZipCodeChange = (event) => {
     this.setState({
@@ -25,8 +21,6 @@ class Preferences extends React.Component {
     this.setState({
       weather: !this.state.weather
     })
-    console.log(event.target.value)
-    console.log("State", this.state)
   }
 
   // handle news
@@ -36,16 +30,22 @@ class Preferences extends React.Component {
     })
   }
 
+  handleSwansonChange = (event) => {
+    this.setState({
+      swanson: !this.state.swanson
+    })
+  }
+
   handleSubmit = (event) => {
     event.preventDefault()
     this.props.updatePreferences({
       zipcode: this.state.zipcode,
       weather: this.state.weather,
-      news: this.state.news
+      news: this.state.news,
+      swanson: this.state.swanson
     })
-    this.setState({
-      submitted: true
-    })
+    console.log("about to push to home")
+    this.props.history.push('/home')
   }
 
   render(){
@@ -58,6 +58,8 @@ class Preferences extends React.Component {
   				<label>News</label>
   				<input id="weather" type="checkbox" defaultChecked={this.state.weather} onChange={this.handleWeatherChange} value={this.state.weather} />
   				<label>Weather</label>
+  				<input id="swanson" type="checkbox" defaultChecked={this.state.swanson} onChange={this.handleSwansonChange} value={this.state.swanson} />
+  				<label>Knowledge from Ron Swanson</label>
   				<input type="submit"/>
   			</form>
       )

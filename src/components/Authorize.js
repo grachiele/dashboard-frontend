@@ -3,6 +3,9 @@ import { Redirect } from 'react-router-dom'
 
 function Authorize(RenderedComponent, props) {
   return class extends React.Component {
+    constructor(props){
+      super(props)
+    }
 
     render() {
       if (localStorage.getItem('jwtToken') && this.props.location.pathname !== "/home" && this.props.location.pathname !== "/preferences") {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import {Route, Redirect, Switch} from 'react-router-dom';
 import LogIn from './components/LogIn';
 import { Container, Segment } from 'semantic-ui-react';
 import WidgetsContainer from './containers/WidgetsContainer';
@@ -33,7 +33,6 @@ class App extends Component {
       return response.json()
     })
     .then((respJSON) => {
-      console.log(respJSON)
       localStorage.setItem('jwtToken', respJSON.jwt)
       this.setState({
         user: respJSON.user,
@@ -56,9 +55,10 @@ class App extends Component {
       return response.json()
     })
     .then((respJSON) => {
-      this.setState({
-        user: respJSON.user,
-      })
+      console.log("respJSON UPDATE",respJSON)
+      return this.setState({
+        user: respJSON,
+      }, () => console.log("update", this.state))
     })
   }
 
@@ -127,10 +127,10 @@ class App extends Component {
   }
 
   render() {
-    const AuthWidget = Authorize(WidgetsContainer)
+    const AuthWidget = Authorize(WidgetsContainer, this.state.user)
     const AuthLogIn = Authorize(LogIn)
-    const AuthPreferences = Authorize(Preferences)
-    const AuthSignUp = Authorize(SignUp)
+    const AuthPreferences = Authorize(Preferences, this.state.user)
+    const AuthSignUp = Authorize(SignUp, this.state.user)
 
     return (
       // need to pass isLoggedIn into navbar to determine which links to show
@@ -139,10 +139,13 @@ class App extends Component {
           <NavBar logOutUser={this.logOutUser} isLoggedIn={this.state.isLoggedIn}/>
         </Segment>
         <Segment>
-          <Route path='/login' render={(props) => <AuthLogIn logInUser={this.logInUser} {...props} />} />
-          <Route path='/home' render={(props) => <AuthWidget user={this.state.user} {...props} />}/>
-          <Route path='/preferences' render={(props) => <AuthPreferences updatePreferences={this.updatePreferences} user={this.state.user} {...props} />}/>
-          <Route path='/signup' render={(props) => <AuthSignUp signUpUser={this.signUpUser} {...props} />}/>
+          <Switch>
+            <Route path='/login' render={(props) => <AuthLogIn logInUser={this.logInUser} {...props} />} />
+            <Route path='/home' render={(props) => <AuthWidget fetchUserInfo={this.fetchUserInfo} user={this.state.user} {...props} />}/>
+            <Route path='/preferences' render={(props) => <AuthPreferences updatePreferences={this.updatePreferences} user={this.state.user} {...props} />}/>
+            <Route path='/signup' render={(props) => <AuthSignUp signUpUser={this.signUpUser} {...props} />}/>
+            <Route path='/' render={() => <h1>404 not found</h1>} />
+          </Switch>
         </Segment>
       </Container>
     );

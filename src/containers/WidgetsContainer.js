@@ -15,9 +15,9 @@ class WidgetsContainer extends React.Component {
 			return (
 				<Card.Group>
 					{this.props.user.news ? <NewsListContainer />: null}
-		      {this.props.user.weather ? <WeatherContainer />: null}
-					{this.props.user.quote ? <RonSwansonContainer />: null}
-		     </Container>);
+		      {this.props.user.weather ? <WeatherContainer zipcode={this.props.user.zipcode}/>: null}
+					{this.props.user.swanson ? <RonSwansonContainer />: null}
+				</Card.Group>);
 		} else {
 			return null;
 			// placeholder -- should be a redirect? or redirect earlier?

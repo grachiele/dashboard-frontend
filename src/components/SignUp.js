@@ -13,7 +13,8 @@ class SignUp extends React.Component {
 			password_confirm: "",
 			zipcode: "",
 			weather: false,
-			news: false
+			news: false,
+			swanson: false
 		}
 	}
 
@@ -58,6 +59,12 @@ class SignUp extends React.Component {
 		})
 	}
 
+	handleSwansonChange = (event) => {
+		this.setState({
+			swanson: !this.state.swanson
+		})
+	}
+
 	handleSubmit = (event) => {
 		event.preventDefault()
 		this.props.signUpUser({
@@ -65,7 +72,8 @@ class SignUp extends React.Component {
 			password: this.state.password,
 			zipcode: this.state.zipcode,
 			weather: this.state.weather,
-			news: this.state.news
+			news: this.state.news,
+			swanson: this.state.swanson
 		})
 		this.setState({
 			username: "",
@@ -73,7 +81,8 @@ class SignUp extends React.Component {
 			password_confirm: "",
 			zipcode: "",
 			weather: false,
-			news: false
+			news: false,
+			swanson: false
 		})
 
 	}
@@ -85,10 +94,10 @@ class SignUp extends React.Component {
 					<label>Username</label>
 					<input type="text" onChange={this.handleUsernameChange} value={this.state.username}/>
 				</Form.Field>
-				<Form.Field>	
+				<Form.Field>
 					<label>Password</label>
 					<input type="password" onChange={this.handlePasswordChange} value={this.state.password}/>
-				</Form.Field>	
+				</Form.Field>
 				<Form.Field>
 					<label>Password Confirmation</label>
 					<input type="password" onChange={this.handlePasswordConfirmationChange} value={this.state.password_confirm}/>
@@ -98,12 +107,13 @@ class SignUp extends React.Component {
 					<input type="number" onChange={this.handleZipCodeChange} value={this.state.zipcode}/>
 				</Form.Field>
 				<Form.Field>
-					<input id="news" type="checkbox" onChange={this.handleNewsChange} value={this.state.news} />
-					<label>News</label>
+					<input id="news" type="checkbox" onChange={this.handleNewsChange} value={this.state.news} /><label>News</label>
 				</Form.Field>
 				<Form.Field>
-					<input id="weather" type="checkbox" onChange={this.handleWeatherChange} value={this.state.weather} />
-					<label>Weather</label>
+					<input id="weather" type="checkbox" onChange={this.handleWeatherChange} value={this.state.weather} /><label>Weather</label>
+				</Form.Field>
+				<Form.Field>
+					<input id="swanson" type="checkbox" onChange={this.handleSwansonChange} value={this.state.swanson} /><label>Knowledge from Ron Swanson</label>
 				</Form.Field>
 				<input type="submit"/>
 			</Form>

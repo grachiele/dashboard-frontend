@@ -1,5 +1,6 @@
 import React from 'react'
-import Quote from '../components/Quote'
+import { Card, Feed } from 'semantic-ui-react'
+import RonSwansonQuote from '../components/RonSwansonQuote'
 
 class RonSwansonContainer extends React.Component {
 
@@ -10,7 +11,7 @@ class RonSwansonContainer extends React.Component {
     }
   }
 
-  fetchQuote = () => {
+  componentDidMount() {
     fetch('http://ron-swanson-quotes.herokuapp.com/v2/quotes')
     .then((response) => response.json())
     .then((respJSON) => {
@@ -21,11 +22,19 @@ class RonSwansonContainer extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return(
-      <div>
-        <Quote quote={this.state.quote}/>
-      </div>
+      <Card>
+        <Card.Content>
+          <Card.Header>
+            Knowledge from Ron Swanson
+          </Card.Header>
+        </Card.Content>
+        <Card.Content>
+          <Feed>
+            <RonSwansonQuote quote={this.state.quote}/>
+          </Feed>
+        </Card.Content>
+      </Card>
     )
   }
 }

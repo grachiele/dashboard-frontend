@@ -9,12 +9,14 @@ const WeatherItem = (props) => {
 		return degreesF.toFixed(2);
 	}
 
+	const weatherIcon = `http://openweathermap.org/img/w/${props.icon}.png`
 
 	return (
 		<Feed.Event>
 			<Feed.Content>
 				<Feed.Summary>
-					It is {kelvinToFahrenheit(props.weather.temp)} degrees
+					<img src={weatherIcon} />
+					{kelvinToFahrenheit(props.weather.temp)} degrees
 				</Feed.Summary>
 			</Feed.Content>
 		</Feed.Event>

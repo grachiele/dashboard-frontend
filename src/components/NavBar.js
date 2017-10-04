@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import { Container } from 'semantic-ui-react';
 
- 
+
 /* Add basic styling for NavLinks */
 const link = {
   width: '100px',
@@ -14,13 +14,13 @@ const link = {
   color: 'white',
   cursor: 'pointer'
 }
- 
+
 const NavBar = (props) => {
   	let content = null;
 	if (props.isLoggedIn) {
 		content = (
 			<Container>
-				<NavLink 
+				<NavLink
 				    to="/home"
 				    exact
 				    style={link}
@@ -28,7 +28,7 @@ const NavBar = (props) => {
 				        background: 'darkblue'
 				    }}
 				>Home</NavLink>
-				<NavLink 
+				<NavLink
 	      			to="/preferences"
 	      			exact
 	      			style={link}
@@ -36,7 +36,7 @@ const NavBar = (props) => {
 	        			background: 'darkblue'
 	      			}}
 	    		>Preferences</NavLink>
-	    		<NavLink 
+	    		<NavLink
 	      			to="/login"
 	      			exact
 	      			style={link}
@@ -50,7 +50,7 @@ const NavBar = (props) => {
 	} else {
 		content = (
 			<Container>
-				<NavLink 
+				<NavLink
 			    	to="/login"
 			    	exact
 			    	style={link}
@@ -58,7 +58,7 @@ const NavBar = (props) => {
 			        	background: 'darkblue'
 			      	}}
 			    >Login</NavLink>
-			    <NavLink 
+			    <NavLink
 			      	to="/signup"
 			      	exact
 			      	style={link}
@@ -75,4 +75,3 @@ const NavBar = (props) => {
 }
 
 export default NavBar;
-
